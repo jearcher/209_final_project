@@ -1,0 +1,8 @@
+
+
+noaa_quakes	<-	
+			https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data?maxYear=2021&minYear=1980
+
+
+usgs_1980_6_5_above <- 
+			https://earthquake.usgs.gov/fdsnws/event/1/query.csv?starttime=1980-02-23%2000:00:00&endtime=2021-03-02%2023:59:59&minmagnitude=6.5&orderby=time

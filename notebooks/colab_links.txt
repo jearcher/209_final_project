@@ -1,0 +1,5 @@
+eda_josh.ipynb
+	https://colab.research.google.com/drive/16HIfsdQfxnZkKyckPw_8JMFSbpC-8-m6?usp=sharing
+
+eda_pino.ipynb
+	https://colab.research.google.com/drive/119Ti3SaH3VIJfn7XiUvFVEJ1JOX1b3eC#scrollTo=uLM2UTlSMEG5

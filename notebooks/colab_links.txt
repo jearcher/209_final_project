@@ -3,3 +3,6 @@ eda_josh.ipynb
 
 eda_pino.ipynb
 	https://colab.research.google.com/drive/119Ti3SaH3VIJfn7XiUvFVEJ1JOX1b3eC#scrollTo=uLM2UTlSMEG5
+
+eda_first_assn.ipynb
+	https://colab.research.google.com/drive/1p_4gY663kBWBo1wVleqChQEAG2L0oi10?usp=sharing

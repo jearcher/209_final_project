@@ -1,7 +1,7 @@
 # Use data.table syntax, dplyrs library
 library(data.table)
 library(dplyr)
-
+library(tidyverse)
 # Ensure the directory is "./src/"
 data <- fread("../data/raw/noaa_quakes.tsv")
 
@@ -41,6 +41,34 @@ data[ , "Total Deaths Bin" := case_when(
   `Total Deaths` < 500000 ~ "100,000 - 499,999",
   `Total Deaths` >= 500000 ~ "500,000+"
 )]
+
+
+# Trim Location names 
+
+# Extract all words before ":"
+location <- c()
+for (i in data[ , "Location Name"]) {
+  location <- c(location, sub(pattern = ":.*", replacement =  "", x = i))
+}
+data[ , "Location"] <- location
+# Extract name before "-"
+location <- c()
+for (i in data[ , "Location"]) {
+  location <- c(location, sub(pattern = "\\-.*", replacement =  "", x = i))
+}
+data[ , "Location"] <- location
+# Finally extract name before ";" and ","
+location <- c()
+for (i in data[ , "Location"]) {
+  location <- c(location, sub(pattern = "\\;.*", replacement =  "", x = i))
+}
+data[ , "Location"] <- location
+
+location <- c()
+for (i in data[ , "Location"]) {
+  location <- c(location, sub(pattern = "\\,.*", replacement =  "", x = i))
+}
+data[ , "Location"] <- location
 
 
 # Export to data/clean/noaa_quakes.csv

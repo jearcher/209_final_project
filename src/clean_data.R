@@ -14,7 +14,13 @@ data = data[complete.cases(data[ , "Total Deaths"]),]
 # Create Log Total Deaths variable
 data[ ,  "Log Total Deaths" := log(`Total Deaths`)]
 
-# Bin Magnitudes by 1
+#######################
+# Bin Magnitudes by 1 #
+#######################
+
+# Note: `case_when()` is an alternative to if loops and 
+# assigns values _in order_, so we don't have to use "Mag < 1 & Mag != NA" etc
+# Go from most specific ----> most general when assigning
 data[ , "Magnitude Bin" := case_when(
   Mag == NA ~ "NA",
   Mag < 1 ~ "0-0.9",
@@ -30,7 +36,9 @@ data[ , "Magnitude Bin" := case_when(
   Mag == 10 ~ "10"
 )]
 
-# Bin Deaths
+##############
+# Bin Deaths #
+##############
 
 data[ , "Total Deaths Bin" := case_when(
   `Total Deaths` == NA ~ "NA",
@@ -41,9 +49,29 @@ data[ , "Total Deaths Bin" := case_when(
   `Total Deaths` < 500000 ~ "100,000 - 499,999",
   `Total Deaths` >= 500000 ~ "500,000+"
 )]
+###########
+# Bin Era #
+###########
 
-
-# Trim Location names 
+data[ , "Decade" := case_when(
+  `Year` == NA ~ "NA",
+  `Year` < 1900 ~ "1900 and Before",
+  `Year` < 1910 ~ "1900-1909",
+  `Year` < 1920 ~ "1910-1919",
+  `Year` < 1930 ~ "1920-1929",
+  `Year` < 1940 ~ "1930-1939",
+  `Year` < 1950 ~ "1940-1949",
+  `Year` < 1960 ~ "1950-1959",
+  `Year` < 1970 ~ "1960-1969",
+  `Year` < 1980 ~ "1970-1979",
+  `Year` < 1990 ~ "1980-1989",
+  `Year` < 2000 ~ "1990-1999",
+  `Year` < 2010 ~ "2000-2009",
+  `Year` >= 2010 ~ "2010-2021"
+)]
+########################
+# Trim Location names #
+########################
 
 # Extract all words before ":"
 location <- c()
@@ -70,7 +98,8 @@ for (i in data[ , "Location"]) {
 }
 data[ , "Location"] <- location
 
-
-# Export to data/clean/noaa_quakes.csv
+########################################
+# Export to data/clean/noaa_quakes.csv #
+########################################
 
 fwrite(data, file = "../data/clean/noaa_quakes.csv")

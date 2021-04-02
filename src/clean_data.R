@@ -10,6 +10,8 @@ data = data[-1 ,-1]
 
 # Drop NAs for Total Deaths
 data = data[complete.cases(data[ , "Total Deaths"]),]
+data = data[complete.cases(data[ , "Mag"]),]
+
 
 # Create Log Total Deaths variable
 data[ ,  "Log Total Deaths" := log(`Total Deaths`)]
